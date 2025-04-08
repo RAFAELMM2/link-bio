@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Links Bio</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <h1>Links Bio</h1>
+
+  <div class="input-group">
+    <input id="customTitleInput" type="text" placeholder="Digite seu título personalizado">
+  </div>
+
+  <h2 id="customTitleDisplay"></h2>
+
+  <div class="input-group">
+    <input id="social1" type="text" placeholder="Link da rede social 1">
+  </div>
+  <div class="input-group">
+    <input id="title1" type="text" placeholder="Título do botão 1">
+  </div>
+
+  <div class="input-group">
+    <input id="social2" type="text" placeholder="Link da rede social 2">
+  </div>
+  <div class="input-group">
+    <input id="title2" type="text" placeholder="Título do botão 2">
+  </div>
+
+  <div class="input-group">
+    <input id="mainLink" type="text" placeholder="Link do canal ou vídeo">
+  </div>
+
+  <div class="input-group">
+    <button id="btn1" class="social-btn">Rede Social 1</button>
+  </div>
+
+  <div class="input-group">
+    <button id="btn2" class="social-btn">Rede Social 2</button>
+  </div>
+
+  <div class="input-group">
+    <button id="goBtn" disabled>Ir para o link</button>
+  </div>
+
+  <script>
+    const btn1 = document.getElementById('btn1');
+    const btn2 = document.getElementById('btn2');
+    const goBtn = document.getElementById('goBtn');
+    const customTitleInput = document.getElementById('customTitleInput');
+    const customTitleDisplay = document.getElementById('customTitleDisplay');
+
+    let preenchido1 = false;
+    let preenchido2 = false;
+
+    btn1.addEventListener('click', () => {
+      const link = document.getElementById('social1').value;
+      const title = document.getElementById('title1').value;
+      if (link) {
+        window.open(link, '_blank');
+        btn1.textContent = title || "Rede Social 1";
+        btn1.classList.add('clicked');
+        preenchido1 = true;
+        verificarLiberar();
+      }
+    });
+
+    btn2.addEventListener('click', () => {
+      const link = document.getElementById('social2').value;
+      const title = document.getElementById('title2').value;
+      if (link) {
+        window.open(link, '_blank');
+        btn2.textContent = title || "Rede Social 2";
+        btn2.classList.add('clicked');
+        preenchido2 = true;
+        verificarLiberar();
+      }
+    });
+
+    function verificarLiberar() {
+      if (preenchido1 && preenchido2) {
+        goBtn.disabled = false;
+        goBtn.classList.add('enabled');
+      }
+    }
+
+    goBtn.addEventListener('click', () => {
+      const mainLink = document.getElementById('mainLink').value;
+      if (mainLink) {
+        window.open(mainLink, '_blank');
+      }
+    });
+
+    customTitleInput.addEventListener('input', () => {
+      customTitleDisplay.textContent = customTitleInput.value;
+    });
+  </script>
+
+</body>
+      </html>
