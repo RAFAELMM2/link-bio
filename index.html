@@ -2,107 +2,95 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Links Bio</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <h1>Links Bio</h1>
+  <div class="container">
+    <h1>Links Bio</h1>
+    <h2 id="siteTitle">Meu Link Bio</h2>
 
-  <div class="input-group">
-    <input id="customTitleInput" type="text" placeholder="Digite seu título personalizado">
-  </div>
+    <!-- Título Personalizado -->
+    <div class="input-group">
+      <input type="text" id="titleInput" placeholder="Digite o título do site">
+    </div>
 
-  <h2 id="customTitleDisplay"></h2>
+    <!-- Links de Redes Sociais -->
+    <div class="input-group">
+      <input type="text" id="socialLink1" placeholder="Link para Rede Social 1">
+      <input type="text" id="socialTitle1" placeholder="Título do Link 1">
+    </div>
 
-  <div class="input-group">
-    <input id="social1" type="text" placeholder="Link da rede social 1">
-  </div>
-  <div class="input-group">
-    <input id="title1" type="text" placeholder="Título do botão 1">
-  </div>
+    <div class="input-group">
+      <input type="text" id="socialLink2" placeholder="Link para Rede Social 2">
+      <input type="text" id="socialTitle2" placeholder="Título do Link 2">
+    </div>
 
-  <div class="input-group">
-    <input id="social2" type="text" placeholder="Link da rede social 2">
-  </div>
-  <div class="input-group">
-    <input id="title2" type="text" placeholder="Título do botão 2">
-  </div>
+    <!-- Link para Canal ou Vídeo -->
+    <div class="input-group">
+      <input type="text" id="mainLink" placeholder="Link para Canal ou Vídeo">
+    </div>
 
-  <div class="input-group">
-    <input id="mainLink" type="text" placeholder="Link do canal ou vídeo">
-  </div>
+    <!-- Botão "Ir para o link" -->
+    <div class="input-group">
+      <button id="goButton" disabled>Ir para o link</button>
+    </div>
 
-  <div class="input-group">
-    <button id="btn1" class="social-btn">Rede Social 1</button>
-  </div>
-
-  <div class="input-group">
-    <button id="btn2" class="social-btn">Rede Social 2</button>
-  </div>
-
-  <div class="input-group">
-    <button id="goBtn" disabled>Ir para o link</button>
-  </div>
-
-  <!-- Botões para editar os links -->
-  <div class="input-group">
-    <button id="editBtn1" class="edit-btn">Editar Link 1</button>
-    <button id="editBtn2" class="edit-btn">Editar Link 2</button>
+    <div class="link-buttons">
+      <!-- Botões de Links -->
+      <a id="link1" href="#" class="link-btn" target="_blank">Link 1</a>
+      <a id="link2" href="#" class="link-btn" target="_blank">Link 2</a>
+    </div>
   </div>
 
   <script>
-    const btn1 = document.getElementById('btn1');
-    const btn2 = document.getElementById('btn2');
-    const goBtn = document.getElementById('goBtn');
-    const customTitleInput = document.getElementById('customTitleInput');
-    const customTitleDisplay = document.getElementById('customTitleDisplay');
+    // Obtendo os elementos
+    const titleInput = document.getElementById('titleInput');
+    const siteTitle = document.getElementById('siteTitle');
+    const socialLink1 = document.getElementById('socialLink1');
+    const socialTitle1 = document.getElementById('socialTitle1');
+    const socialLink2 = document.getElementById('socialLink2');
+    const socialTitle2 = document.getElementById('socialTitle2');
+    const mainLink = document.getElementById('mainLink');
+    const goButton = document.getElementById('goButton');
+    const link1 = document.getElementById('link1');
+    const link2 = document.getElementById('link2');
 
-    let preenchido1 = false;
-    let preenchido2 = false;
+    // Atualizar título do site
+    titleInput.addEventListener('input', () => {
+      siteTitle.textContent = titleInput.value || 'Meu Link Bio';
+    });
 
-    // Função para atualizar os botões com os novos links e títulos
-    function atualizarBotao(btn, inputLink, inputTitle) {
-      const link = inputLink.value;
-      const title = inputTitle.value;
-      if (link) {
-        btn.textContent = title || "Link sem título";
-        btn.classList.add('clicked');
-        btn.onclick = () => window.open(link, '_blank');
+    // Atualizar os links dos botões
+    socialLink1.addEventListener('input', () => {
+      link1.href = socialLink1.value;
+    });
+
+    socialLink2.addEventListener('input', () => {
+      link2.href = socialLink2.value;
+    });
+
+    // Habilitar o botão "Ir para o link" se todos os links forem preenchidos
+    function checkLinks() {
+      if (socialLink1.value && socialLink2.value && mainLink.value) {
+        goButton.disabled = false;
+      } else {
+        goButton.disabled = true;
       }
     }
 
-    // Editar botões de redes sociais
-    document.getElementById('editBtn1').addEventListener('click', () => {
-      atualizarBotao(btn1, document.getElementById('social1'), document.getElementById('title1'));
+    // Atualizar os links e verificar
+    socialLink1.addEventListener('input', checkLinks);
+    socialLink2.addEventListener('input', checkLinks);
+    mainLink.addEventListener('input', checkLinks);
+
+    // Ação do botão "Ir para o link"
+    goButton.addEventListener('click', () => {
+      window.open(mainLink.value, '_blank');
     });
-
-    document.getElementById('editBtn2').addEventListener('click', () => {
-      atualizarBotao(btn2, document.getElementById('social2'), document.getElementById('title2'));
-    });
-
-    // Função para verificar se o botão "Ir para o link" deve ser habilitado
-    function verificarLiberar() {
-      if (preenchido1 && preenchido2) {
-        goBtn.disabled = false;
-        goBtn.classList.add('enabled');
-      }
-    }
-
-    // Atualizar título personalizado
-    customTitleInput.addEventListener('input', () => {
-      customTitleDisplay.textContent = customTitleInput.value;
-    });
-
-    // Ao clicar no botão "Ir para o link"
-    goBtn.addEventListener('click', () => {
-      const mainLink = document.getElementById('mainLink').value;
-      if (mainLink) {
-        window.open(mainLink, '_blank');
-      }
-    });
-
   </script>
 
 </body>
-</html>
+  </html>
