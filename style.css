@@ -1,0 +1,81 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0d0d0d;
+  color: #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  padding: 30px;
+}
+
+h1 {
+  color: #999;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+h2 {
+  color: #fff;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  width: 90%;
+  max-width: 400px;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  background-color: #1a1a1a;
+  color: #fff;
+  font-size: 16px;
+  outline: none;
+}
+
+input:focus {
+  background-color: #222;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+button:active {
+  transform: scale(0.97);
+}
+
+.social-btn {
+  background-color: red;
+  color: white;
+  margin-top: 10px;
+}
+
+.social-btn.clicked {
+  background-color: gray;
+}
+
+#goBtn {
+  background-color: gray;
+  color: white;
+  margin-top: 30px;
+}
+
+#goBtn.enabled {
+  background-color: green;
+    }
