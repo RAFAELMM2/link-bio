@@ -45,6 +45,12 @@
     <button id="goBtn" disabled>Ir para o link</button>
   </div>
 
+  <!-- Botões para editar os links -->
+  <div class="input-group">
+    <button id="editBtn1" class="edit-btn">Editar Link 1</button>
+    <button id="editBtn2" class="edit-btn">Editar Link 2</button>
+  </div>
+
   <script>
     const btn1 = document.getElementById('btn1');
     const btn2 = document.getElementById('btn2');
@@ -55,30 +61,27 @@
     let preenchido1 = false;
     let preenchido2 = false;
 
-    btn1.addEventListener('click', () => {
-      const link = document.getElementById('social1').value;
-      const title = document.getElementById('title1').value;
+    // Função para atualizar os botões com os novos links e títulos
+    function atualizarBotao(btn, inputLink, inputTitle) {
+      const link = inputLink.value;
+      const title = inputTitle.value;
       if (link) {
-        window.open(link, '_blank');
-        btn1.textContent = title || "Rede Social 1";
-        btn1.classList.add('clicked');
-        preenchido1 = true;
-        verificarLiberar();
+        btn.textContent = title || "Link sem título";
+        btn.classList.add('clicked');
+        btn.onclick = () => window.open(link, '_blank');
       }
+    }
+
+    // Editar botões de redes sociais
+    document.getElementById('editBtn1').addEventListener('click', () => {
+      atualizarBotao(btn1, document.getElementById('social1'), document.getElementById('title1'));
     });
 
-    btn2.addEventListener('click', () => {
-      const link = document.getElementById('social2').value;
-      const title = document.getElementById('title2').value;
-      if (link) {
-        window.open(link, '_blank');
-        btn2.textContent = title || "Rede Social 2";
-        btn2.classList.add('clicked');
-        preenchido2 = true;
-        verificarLiberar();
-      }
+    document.getElementById('editBtn2').addEventListener('click', () => {
+      atualizarBotao(btn2, document.getElementById('social2'), document.getElementById('title2'));
     });
 
+    // Função para verificar se o botão "Ir para o link" deve ser habilitado
     function verificarLiberar() {
       if (preenchido1 && preenchido2) {
         goBtn.disabled = false;
@@ -86,6 +89,12 @@
       }
     }
 
+    // Atualizar título personalizado
+    customTitleInput.addEventListener('input', () => {
+      customTitleDisplay.textContent = customTitleInput.value;
+    });
+
+    // Ao clicar no botão "Ir para o link"
     goBtn.addEventListener('click', () => {
       const mainLink = document.getElementById('mainLink').value;
       if (mainLink) {
@@ -93,10 +102,7 @@
       }
     });
 
-    customTitleInput.addEventListener('input', () => {
-      customTitleDisplay.textContent = customTitleInput.value;
-    });
   </script>
 
 </body>
-      </html>
+</html>
