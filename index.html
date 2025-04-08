@@ -33,15 +33,14 @@
       <input type="text" id="mainLink" placeholder="Link para Canal ou Vídeo">
     </div>
 
-    <!-- Botão "Ir para o link" -->
+    <!-- Botão de Gerar Links -->
     <div class="input-group">
-      <button id="goButton" disabled>Ir para o link</button>
+      <button id="generateButton">Gerar Link Bio</button>
     </div>
 
-    <div class="link-buttons">
-      <!-- Botões de Links -->
-      <a id="link1" href="#" class="link-btn" target="_blank">Link 1</a>
-      <a id="link2" href="#" class="link-btn" target="_blank">Link 2</a>
+    <!-- Área para exibir os botões dos links -->
+    <div id="linkContainer" class="link-buttons">
+      <!-- Os links irão aparecer aqui -->
     </div>
   </div>
 
@@ -54,43 +53,54 @@
     const socialLink2 = document.getElementById('socialLink2');
     const socialTitle2 = document.getElementById('socialTitle2');
     const mainLink = document.getElementById('mainLink');
-    const goButton = document.getElementById('goButton');
-    const link1 = document.getElementById('link1');
-    const link2 = document.getElementById('link2');
+    const generateButton = document.getElementById('generateButton');
+    const linkContainer = document.getElementById('linkContainer');
 
     // Atualizar título do site
     titleInput.addEventListener('input', () => {
       siteTitle.textContent = titleInput.value || 'Meu Link Bio';
     });
 
-    // Atualizar os links dos botões
-    socialLink1.addEventListener('input', () => {
-      link1.href = socialLink1.value;
-    });
+    // Função para criar os botões com os links e títulos
+    function generateLinks() {
+      // Limpar a área de links
+      linkContainer.innerHTML = '';
 
-    socialLink2.addEventListener('input', () => {
-      link2.href = socialLink2.value;
-    });
+      // Verificar se os campos necessários estão preenchidos
+      if (socialLink1.value && socialTitle1.value) {
+        // Criar botão para o primeiro link
+        const linkButton1 = document.createElement('a');
+        linkButton1.href = socialLink1.value;
+        linkButton1.target = '_blank';
+        linkButton1.classList.add('link-btn');
+        linkButton1.textContent = socialTitle1.value;
+        linkContainer.appendChild(linkButton1);
+      }
 
-    // Habilitar o botão "Ir para o link" se todos os links forem preenchidos
-    function checkLinks() {
-      if (socialLink1.value && socialLink2.value && mainLink.value) {
-        goButton.disabled = false;
-      } else {
-        goButton.disabled = true;
+      if (socialLink2.value && socialTitle2.value) {
+        // Criar botão para o segundo link
+        const linkButton2 = document.createElement('a');
+        linkButton2.href = socialLink2.value;
+        linkButton2.target = '_blank';
+        linkButton2.classList.add('link-btn');
+        linkButton2.textContent = socialTitle2.value;
+        linkContainer.appendChild(linkButton2);
+      }
+
+      // Criar botão para o canal ou vídeo
+      if (mainLink.value) {
+        const linkButton3 = document.createElement('a');
+        linkButton3.href = mainLink.value;
+        linkButton3.target = '_blank';
+        linkButton3.classList.add('link-btn');
+        linkButton3.textContent = 'Canal / Vídeo';
+        linkContainer.appendChild(linkButton3);
       }
     }
 
-    // Atualizar os links e verificar
-    socialLink1.addEventListener('input', checkLinks);
-    socialLink2.addEventListener('input', checkLinks);
-    mainLink.addEventListener('input', checkLinks);
-
-    // Ação do botão "Ir para o link"
-    goButton.addEventListener('click', () => {
-      window.open(mainLink.value, '_blank');
-    });
+    // Gerar os links ao clicar no botão
+    generateButton.addEventListener('click', generateLinks);
   </script>
 
 </body>
-  </html>
+</html>
