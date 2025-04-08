@@ -78,4 +78,15 @@ button:active {
 
 #goBtn.enabled {
   background-color: green;
-    }
+}
+
+.edit-btn {
+  background-color: #333;
+  color: white;
+  font-size: 14px;
+  margin-top: 15px;
+}
+
+.edit-btn:hover {
+  background-color: #555;
+  }
