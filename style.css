@@ -47,7 +47,7 @@ input {
 button {
   width: 100%;
   padding: 10px;
-  background-color: gray;
+  background-color: #007bff;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -55,13 +55,8 @@ button {
   font-size: 16px;
 }
 
-button:disabled {
-  background-color: #555;
-  cursor: not-allowed;
-}
-
-button:enabled {
-  background-color: green;
+button:hover {
+  background-color: #0056b3;
 }
 
 .link-buttons {
@@ -87,4 +82,4 @@ button:enabled {
 
 .link-btn:active {
   background-color: #e74c3c;
-}
+  }
